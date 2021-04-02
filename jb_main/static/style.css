@@ -1,0 +1,14 @@
+nav {
+    width: 80%;
+    background-color: teal;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
+
+li {
+    display: inline;
+}

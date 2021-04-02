@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>NY TIMES API</h1>
+{% if not response %}
+    <p> loading... </p>
+{% else %}   
+    {% for story in response %}
+        <ul list-style-type: none>
+        <li><h4><a href = {{ story.url }} target="_blank"> {{ story.title }}</a></h4></li>
+        <li><span><h4>Keywords:</h4> {{ story.adx_keywords }} </span></li>
+        <li><span><h4>People:</h4> {{ story.per_facet }} </span></li>
+        <li><span><h4>Places:</h4> {{ story.geo_facet }} </span></li>
+        </ul>
+    {% endfor %}
+{% endif %}    
+{% endblock %}
