@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1> Jokes </h1>
+    <p>  {{ joke.text }}</p>
+    <p> From: {{ joke.source }}</p>
+    <p> By: {{ joke.author }}</p>
+
+    {% endblock %}

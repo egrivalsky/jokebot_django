@@ -9,12 +9,14 @@ class Joke(models.Model):
     source = models.CharField(blank=True, max_length=50, default='unknown')
     author = models.CharField(blank=True, max_length=50, default='unknown')
     frequency = models.IntegerField(default=0)
-
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    print('THIS IS THE USER VVVVVVVV')
+    print(user)
+    print('THAT WAS THE USER ^^^^^^^^^^^^')
 
 
     def __str__(self):
-        return "a joke"
+        return self.author
 
 class Profile(models.Model):
     about_me = models.CharField(blank=True, max_length=500)

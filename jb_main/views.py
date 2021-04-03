@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from pynytimes import NYTAPI
-from joke.jokes import *
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
-from .models import *
+from .models import Joke, Profile, User
+from .forms import JokeForm, ProfileForm
+from django.contrib.auth.decorators import login_required
+import json
 
 nyt = NYTAPI('FtZ0xW7RIZ9wRxJJiR02MNv37ChQGZPO', parse_dates=True)
 
@@ -38,6 +40,20 @@ def jokes(request):
 def about(request):
     return render(request, 'about.html')
 
+# JOKES
+def jokes_index(request):
+    jokes = Joke.objects.filter(user = request.user)
+    return render(request, 'jokes/index.html', { 'jokes':jokes})
+
+def joke_show(request, joke_id):
+    joke = Joke.objects.get(id=joke_id)
+    joke_form = JokeForm()
+    return render(request, 'jokes/show.html', {
+        'joke':joke,
+        'joke_form': joke_form
+    })
+
+
 
 
 # CREATE VIEWS FOR FORMS
@@ -53,20 +69,24 @@ class JokeUpdate(UpdateView):
 def form_valid(self, form):
     self.object = form.save(commit=False)
     self.object.save()
-    return HttpResponseRedirect('/cats/' + str(self.object.pk))
+    return HttpResponseRedirect('/jokes/' + str(self.object.pk))
 
 class JokeDelete(DeleteView):
     model = Joke
     success_url = '/jokes'
 
+@login_required()
 def jokes_new(request):
-    joke_form = JokeForm(request.POST or None)
+    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    joke_form = JokeForm(request.POST)
 
-    if request.POST and joke_form.is_valid():
+    if  request.POST and joke_form.is_valid():
         new_joke = joke_form.save(commit=False)
         new_joke.user = request.user
         new_joke.save()
+
         return redirect('jokes')
     else:
+        print('****************************************************')
         return render(request, 'jokes/new.html', { 'joke_form': joke_form })
 

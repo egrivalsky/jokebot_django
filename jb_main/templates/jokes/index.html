@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1> Jokes </h1>
+    {% for joke in jokes %}
+        <p>  {{ joke.text }}</p>
+        <p> From: {{ joke.source }}</p>
+        <p> By: {{ joke.author }}</p>
+    {% endfor %}
+
+    {% endblock %}
