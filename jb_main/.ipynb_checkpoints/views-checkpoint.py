@@ -2,7 +2,7 @@ from django.shortcuts import render
 from pynytimes import NYTAPI
 
 
-nyt = NYTAPI('FtZ0xW7RIZ9wRxJJiR02MNv37ChQGZPO', parse_dates=True)
+# SECRET 2 GOES HERE
 
 # Create your views here.
 
