@@ -1,4 +1,4 @@
-nav {
+/* nav {
     width: 80%;
     background-color: teal;
     height: 60px;
@@ -7,8 +7,14 @@ nav {
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
-}
+} */
 
 li {
     display: inline;
+}
+nav a {
+    text-decoration: none;
+}
+li :hover {
+    color: black;
 }

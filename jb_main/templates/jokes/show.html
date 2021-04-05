@@ -1,10 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
 <h1> Jokes </h1>
-    <p>  {{ joke.text }}</p>
-    <p> From: {{ joke.source }}</p>
-    <p> By: {{ joke.author }}</p>
+    <main>
+            <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin:0 auto; border">
+            <header class="w3-container w3-teal">
+              <ul>
+                <li class="w3-button">
+                  <form action='joke_favorite' method='GET'>
+                    <button class="w3-button w3-white" type='submit'>Add to Favorites</button>
+                  </form>
+                </li>
+                <li class="w3-button">
+                  <form action='joke_tweet' method='GET'>
+                    <button class="w3-button w3-white" type='submit'>Tweet this joke</button>
+                  </form>
+                </li>
+              </ul>
+            </header>
+                <div class="w3-container">
+                <p><h4>  {{ joke.text }}</h4></p>
+                </a>
+                </div>
+                <footer class="w3-container" style="max-height:36px">
+                <ul>
+                <li>From: {{ joke.source }}</li>
+                <li>By: {{ joke.author }}</li>
+                </ul>
+            </div>
+    <main>
 
     {% endblock %}

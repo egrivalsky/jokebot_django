@@ -4,27 +4,44 @@
   <head>
     <title>Jokebot 8000!</title>
     <!-- Add the following line... -->
+    <link rel="stylesheet" type="text/css" href="{% static "w3.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
   </head>
-<header>
+<div class="w3-container w3-white">
+<header class="w3-container w3-teal w3-serif">
     <nav>
       <ul>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href ="{% url 'news' %}" >News</a></li>
-        {% if user.is_authenticated %}
-        <li><a href = "{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'logout' %}">Log Out</a></li>
-        <li><a href="{% url 'jokes' %}">Jokes</a></li>
-        {% else %}
-        <li><a href="{% url 'login' %}">Log In</a></li>
-        <li><a href="{% url 'signup' %}">Sign Up</a></li>
-        {% endif %}  
+        <h3>
+          <span>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href ="{% url 'news' %}" >News</a></li>
+            {% if user.is_authenticated %}
+            <li><a href = "{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li><a href="{% url 'jokes' %}">Jokes</a></li>
+          </span>
+          <span>
+            <li>{{request.user.name}}</li>
+            <li><a href="{% url 'profile' %}">View Profile</a></li>
+          </span>
+          {% else %}
+          <li><a href="{% url 'login' %}" >Log In</a></li>
+          <li><a href="{% url 'signup' %}" >Sign Up</a></li>
+        {% endif %}
+        </h3>
       </ul>
 
     </nav>
 </header>
-<body>
+<body class="w3-serif">
+  <main class="w3-container">
     {% block content %}
     {% endblock %}
+  </main>  
 </body>
+<footer class="w3-container w3-teal w3-serif footer" style="margin-top:25px">
+Jokebot - 2021
+</footer>
+</div>
 </html>

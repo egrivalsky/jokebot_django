@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section>
+    <h1>Write a joke!</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ joke_form.as_p}}
+        <button type="submit" class="w3-button w3-round-large w3-teal">Save joke</button>
+    </form>
+</section>
+
+{% endblock %}

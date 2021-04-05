@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
-<h1> Jokes </h1>
-    <main>
-        {% for joke in jokes %}
+{% block content %}
+    <h1>Profile</h1>
+    <p>About me: {{user.profile.about_me}}</p>
+    <p>Favorite jokes:</p>
+                {% for joke in fav_jokes %}
             <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin:0 auto; border">
             <header class="w3-container w3-teal">
             </header>
@@ -20,8 +21,5 @@
                 </ul>
             </div>
         {% endfor %}
-    <main>
 
 {% endblock %}
-
-Reverted!

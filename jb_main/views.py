@@ -7,9 +7,10 @@ from django.http import HttpResponseRedirect
 from .models import Joke, Profile, User
 from .forms import JokeForm, ProfileForm
 from django.contrib.auth.decorators import login_required
-import json
+import twitter
+from datetime import datetime, timedelta
 
-nyt = NYTAPI('FtZ0xW7RIZ9wRxJJiR02MNv37ChQGZPO', parse_dates=True)
+## SECRETS GO HERE *****************************************************************
 
 # Create your views here.
 def signup(request):
@@ -48,19 +49,19 @@ def jokes_index(request):
 def joke_show(request, joke_id):
     joke = Joke.objects.get(id=joke_id)
     joke_form = JokeForm()
+    last_tweeted = joke.last_tweeted
+    print(f"Last Tweeted: {last_tweeted}")
     return render(request, 'jokes/show.html', {
         'joke':joke,
         'joke_form': joke_form
     })
 
 
-
-
 # CREATE VIEWS FOR FORMS
-class JokeCreate(CreateView):
-    model = Joke
-    fields = ['text', 'source', 'author']
-    success_url = '/jokes'
+# class JokeCreate(CreateView):
+#     model = Joke
+#     fields = ['text', 'source', 'author']
+#     success_url = '/jokes'
 
 class JokeUpdate(UpdateView):
     model = Joke
@@ -75,9 +76,8 @@ class JokeDelete(DeleteView):
     model = Joke
     success_url = '/jokes'
 
-@login_required()
+
 def jokes_new(request):
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++')
     joke_form = JokeForm(request.POST)
 
     if  request.POST and joke_form.is_valid():
@@ -87,6 +87,37 @@ def jokes_new(request):
 
         return redirect('jokes')
     else:
-        print('****************************************************')
         return render(request, 'jokes/new.html', { 'joke_form': joke_form })
+
+# FUNCTIONS
+def joke_tweet(request, joke_id):
+        joke = Joke.objects.get(id=joke_id)
+        now = datetime.datetime.now()
+        joke.last_tweeted = now.strftime("%j")
+        message = joke.text
+        twitter.PostUpdate(f"{message}")
+        print(f"{message} last tweeted at {joke.last_tweeted}")
+        return render(request, 'jokes/show.html', {
+        'joke':joke,
+        })
+
+def joke_favorite(request, joke_id, ):
+    joke = Joke.objects.get(id=joke_id)
+    user = request.user
+    user.profile.favorites.add(joke)
+    return render(request, 'jokes/show.html', {
+    'joke':joke,
+    })
+
+
+# PROFILE
+def profile(request):
+    user = request.user
+    fav_jokes = user.profile.favorites.all()
+    return render(request, 'profile.html', {
+        'user': user,
+        'fav_jokes': fav_jokes
+    })
+
+
 
