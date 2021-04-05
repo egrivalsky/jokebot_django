@@ -11,6 +11,12 @@ import twitter
 from datetime import datetime, timedelta
 
 ## SECRETS GO HERE *****************************************************************
+twitter = twitter.Api(consumer_key='SKYECqSOCN6BMIbdcV1x7r5py',
+                      consumer_secret='W8QAtdaYiJ9kLrrmA2SigFgxAJwwG1jid8VZm4Kky7l42qOJoC',
+                      access_token_key='1376347053802975232-Rele3j0mkJ9PQrvtgazyRDru0G0UFm',
+                      access_token_secret='1q6Mg8aXSEdH1wFninZSCpIlKIxLzMTfp2KdAtA2xFLGd')
+
+nyt = NYTAPI('FtZ0xW7RIZ9wRxJJiR02MNv37ChQGZPO', parse_dates=True)
 
 # Create your views here.
 def signup(request):
@@ -32,8 +38,22 @@ def index(request):
 
 def news(request):
     response = nyt.most_viewed(days = 30)
+    for n in response:
+        n['adx_keywords'] = n['adx_keywords'].split(';')
 
-    return render(request, 'news.html', { 'response': response })
+    return render(request, 'news.html', { 
+        'response': response, 
+        })
+
+def news_keywords(request, story_id):
+    response = nyt.most_viewed(days = 30)
+    for n in response:
+        if n['id'] == story_id:
+            response = n
+
+    return render(request, 'keywords.html', { 
+        'response': response, 
+        })
 
 def jokes(request):
     return render(request, 'jokes.html')
@@ -101,7 +121,7 @@ def joke_tweet(request, joke_id):
         'joke':joke,
         })
 
-def joke_favorite(request, joke_id, ):
+def joke_favorite(request, joke_id):
     joke = Joke.objects.get(id=joke_id)
     user = request.user
     user.profile.favorites.add(joke)
@@ -113,10 +133,13 @@ def joke_favorite(request, joke_id, ):
 # PROFILE
 def profile(request):
     user = request.user
+    user_id=user.id
     fav_jokes = user.profile.favorites.all()
+    written_jokes = Joke.objects.filter(user=user_id)
     return render(request, 'profile.html', {
         'user': user,
-        'fav_jokes': fav_jokes
+        'fav_jokes': fav_jokes,
+        'written_jokes': written_jokes
     })
 
 

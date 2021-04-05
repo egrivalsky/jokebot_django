@@ -1,18 +1,105 @@
 {% extends "base.html" %}
 {% load static %}
+
+
+
 {% block content %}
 
-<h1>NY TIMES API</h1>
+<script>
+function accordian(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    x.previousElementSibling.className += " w3-teal";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+    x.previousElementSibling.className =
+  x.previousElementSibling.className.replace("w3-teal", "");
+  }
+}
+</script>
+
+<h1>Here's the hottest goss:</h1>
+
 {% if not response %}
     <p> loading... </p>
 {% else %}   
-    {% for story in response %}
-        <ul list-style-type: none>
-        <li><h4><a href = {{ story.url }} target="_blank"> {{ story.title }}</a></h4></li>
-        <li><span><h4>Keywords:</h4> {{ story.adx_keywords }} </span></li>
-        <li><span><h4>People:</h4> {{ story.per_facet }} </span></li>
-        <li><span><h4>Places:</h4> {{ story.geo_facet }} </span></li>
-        </ul>
-    {% endfor %}
+{% for story in response %}
+<div class="w3-light-grey" style="width:75% margin: 0 auto">
+    <button onclick="accordian({{ story.id }})" class="w3-button w3-block">
+        {{ story.title }}
+    </button>
+    <div id="{{ story.id }}" class="w3-hide">
+        <div class="details w3-container">
+    <!--  LINK TO STORY  -->
+            <div class="w3-card-4" id="link-to-story">
+            <header class="w3-container w3-grey">
+                <h5>Article:</h5>
+            </header>
+            <div class="w3-container" id="link-to-story-body">
+                <h5><a href = {{ story.url }} target="_blank">Read the article </a></h5>
+                <h5><a href="/news/{{story.id}}">Go to Keywords </a></h5>
+            </div>
+        </div>
+    <!--  KEYWORDS  -->
+
+            <div class="w3-card-4" id="keywords">
+                <header class="w3-container w3-grey">
+                    <h4>Keywords:</h4>
+                </header>
+                <div class="w3-container">
+                    <ul>
+                    {% for word in story.adx_keywords %}
+                    <li> {{ word }} </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+    <!--  PEOPLE  -->
+        {% if story.per_facet %}
+            <div class="w3-card-4" id="people">
+                <header class="w3-container w3-grey">
+                    <h4>People:</h4>
+                </header>
+                <div class="w3-container">
+                    <ul>
+                    {% for name in story.per_facet %}
+                    <li> {{ name }} </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    <!--  PLACES  -->
+        {% if story.geo_facet %}
+            <div class="w3-card-4" id="places">
+                <header class="w3-container w3-grey">
+                    <h4>Places:</h4>
+                </header>
+                <div class="w3-container">
+                    <ul>
+                        {% for place in story.geo_facet %}
+                        <li> {{ place }} </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
 {% endif %}    
 {% endblock %}
+
+{% comment %} <script>
+function accordian(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script> {% endcomment %}

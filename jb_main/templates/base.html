@@ -8,29 +8,27 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
   </head>
-<div class="w3-container w3-white">
+<div class="w3-display-container w3-white">
 <header class="w3-container w3-teal w3-serif">
     <nav>
-      <ul>
         <h3>
-          <span>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href ="{% url 'news' %}" >News</a></li>
+          <span id="nav-left">
+           <a href="{% url 'about' %}">About</a>
+            <a href ="{% url 'news' %}" >News</a>
             {% if user.is_authenticated %}
-            <li><a href = "{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
-            <li><a href="{% url 'jokes' %}">Jokes</a></li>
+            <a href = "{% url 'index' %}">Home</a>
+            <a href="{% url 'logout' %}">Log Out</a>
+            <a href="{% url 'jokes' %}">Jokes</a>
           </span>
-          <span>
-            <li>{{request.user.name}}</li>
-            <li><a href="{% url 'profile' %}">View Profile</a></li>
+          <span id="nav-right">
+            {{request.user.name}}
+            <a href="{% url 'profile' %}">View Profile</a>
           </span>
           {% else %}
-          <li><a href="{% url 'login' %}" >Log In</a></li>
-          <li><a href="{% url 'signup' %}" >Sign Up</a></li>
+          <a href="{% url 'login' %}" >Log In</a>
+          <a href="{% url 'signup' %}" >Sign Up</a>
         {% endif %}
         </h3>
-      </ul>
 
     </nav>
 </header>
@@ -40,8 +38,8 @@
     {% endblock %}
   </main>  
 </body>
-<footer class="w3-container w3-teal w3-serif footer" style="margin-top:25px">
-Jokebot - 2021
+<footer class="w3-teal footer" style="margin-top:25px">
+<h2>Jokebot - 2021</h2>
 </footer>
 </div>
 </html>

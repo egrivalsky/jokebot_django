@@ -4,6 +4,26 @@
 {% block content %}
     <h1>Profile</h1>
     <p>About me: {{user.profile.about_me}}</p>
+    
+            <p>Jokes I've Written:</p>
+                {% for joke in written_jokes %}
+            <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin:0 auto; border">
+            <header class="w3-container w3-teal">
+            </header>
+            <div class="w3-container">
+                <a href="/jokes/{{joke.id}}">
+                  <p><h4>  {{ joke.text }}</h4></p>
+                </a>
+                  <p>Unfavorite</p>
+                </div>
+                <footer class="w3-container w3-teal" style="max-height:36px">
+                <ul>
+                  <li>From: {{ joke.source }}</li>
+                  <li>By: {{ joke.author }}</li>
+                </ul>
+            </div>
+        {% endfor %}
+
     <p>Favorite jokes:</p>
                 {% for joke in fav_jokes %}
             <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin:0 auto; border">
@@ -13,6 +33,7 @@
                 <a href="/jokes/{{joke.id}}">
                 <p><h4>  {{ joke.text }}</h4></p>
                 </a>
+                  <p><a href="jokes/{{ joke.id }}/update/">Edit</p></a><p><a href="jokes/{{ joke.id }}/delete/">Delete</a></p>
                 </div>
                 <footer class="w3-container w3-teal" style="max-height:36px">
                 <ul>
@@ -20,6 +41,6 @@
                 <li>By: {{ joke.author }}</li>
                 </ul>
             </div>
-        {% endfor %}
+                {% endfor %}
 
 {% endblock %}

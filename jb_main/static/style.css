@@ -1,20 +1,58 @@
-/* nav {
-    width: 80%;
-    background-color: teal;
+nav {
     height: 60px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
     margin: 0 auto;
-} */
+}
 
-li {
+nav li {
     display: inline;
 }
 nav a {
     text-decoration: none;
 }
-li :hover {
+nav li :hover {
     color: black;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    height: 60px;
+    width:100%;
+}
+
+#nav-left{
+    align-self: left;
+}
+
+#nav-right{
+    align-self: end;
+}
+
+.details {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    height: 200px;
+
+
+}
+
+#keywords, #people, #places, #link-to-story {
+    min-height: 100%;
+    width: 300px;
+    margin: 10px;
+
+}
+
+#link-to-story-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

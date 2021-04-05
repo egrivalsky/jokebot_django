@@ -12,7 +12,7 @@ class Joke(models.Model):
     author = models.CharField(blank=True, max_length=50, default='unknown')
     frequency = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    last_tweeted = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    last_tweeted = models.DateTimeField(auto_now=True, auto_now_add=False, blank=True, null=True)
 
 
     def __str__(self):
