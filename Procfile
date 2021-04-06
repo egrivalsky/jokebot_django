@@ -1,1 +1,1 @@
-web: gunicorn jokebot8000.wsgi
+web: gunicorn jokebot.wsgi
