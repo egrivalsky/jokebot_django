@@ -7,12 +7,14 @@
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     {{ form.as_p }}
-
+  <h3>g<span style="text-decoration: underline">OTCHA</span>:</h3>
+    <h4>
       <input type="radio" id="not-robot" name="bot-or-not" value="not-robot">
       <label for="not-robot">I am not a robot</label><br>
       <input type="radio" id="robot" name="bot-or-not" value="robot">
       <label for="robot">I am a robot</label><br>
-
+      <sub>Jokebot believes in a free and open net even for robots.</sub>
+    </h4>
     <input type="submit" class="btn" value="login">
     <input type="hidden" name="next" value="{{ next }}">
   </form>

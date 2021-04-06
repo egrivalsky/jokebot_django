@@ -48,7 +48,7 @@ def news(request):
     return render(request, 'news.html', { 
         'response': response, 
         })
-
+@login_required
 def news_keywords(request, story_id):
     response = nyt.most_viewed(days = 30)
     for n in response:
@@ -67,9 +67,10 @@ def about(request):
 
 # JOKES
 def jokes_index(request):
-    jokes = Joke.objects.filter(user = request.user).order_by('-id')
+    jokes = Joke.objects.all().order_by('-id')
+    # jokes = Joke.objects.filter(user = request.user).order_by('-id')
     return render(request, 'jokes/index.html', { 'jokes':jokes})
-
+@login_required
 def joke_show(request, joke_id):
     joke = Joke.objects.get(id=joke_id)
     joke_form = JokeForm()
@@ -118,7 +119,7 @@ def jokes_new(request):
         return render(request, 'jokes/new.html', { 'joke_form': joke_form })
 
 # FUNCTIONS
-
+@login_required
 def joke_tweet(request, joke_id):
         joke = Joke.objects.get(id=joke_id)
         now = datetime.now()
@@ -131,16 +132,16 @@ def joke_tweet(request, joke_id):
         'joke': joke,
         })
 
-
+@login_required
 def joke_favorite(request, joke_id):
-    joke = Joke.objects.get(id=joke_id).order_by('-id')
+    joke = Joke.objects.get(id=joke_id)
     user = request.user
     user.profile.favorites.add(joke)
     return render(request, 'jokes/show.html', {
     'joke':joke,
     })
 
-
+@login_required
 def related_words(request, word):
     related = datamuse.words(rel_jja=word)
     rhymes = datamuse.words(rel_rhy=word)
@@ -156,6 +157,7 @@ def related_words(request, word):
 
 
 # PROFILE
+@login_required
 def profile(request):
     user = request.user
     user_id=user.id
