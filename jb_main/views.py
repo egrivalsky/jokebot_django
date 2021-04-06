@@ -156,7 +156,6 @@ def related_words(request, word):
 
 
 # PROFILE
-@login_required
 def profile(request):
     user = request.user
     user_id=user.id
