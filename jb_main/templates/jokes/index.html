@@ -3,24 +3,33 @@
 {% block content %}
 
 <h1> Jokes </h1>
-    <main>
-        {% for joke in jokes %}
-            <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin:0 auto; border">
-            <header class="w3-container w3-teal">
-            </header>
-                <div class="w3-container">
-                <a href="/jokes/{{joke.id}}">
-                <p><h4>  {{ joke.text }}</h4></p>
-                </a>
-                </div>
-                <footer class="w3-container w3-teal" style="max-height:36px">
-                <ul>
-                <li>From: {{ joke.source }}</li>
-                <li>By: {{ joke.author }}</li>
-                </ul>
-            </div>
-        {% endfor %}
-    <main>
+<main>
+    <div id="now-write-a-joke">
+        <a href='/jokes/create'>
+            Write a joke!
+        </a>
+    </div>
+
+    {% for joke in jokes %}
+    <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin: 10px auto; border">
+        <div class="w3-container">
+            <a href="/jokes/{{joke.id}}">
+                <p><h4> {{ joke.text }} </h4></p>
+            </a>
+        </div>
+        <footer class="w3-container w3-teal" style="max-height:36px">
+        <span style="padding:0 60px">
+        <h4>
+            From: {{ joke.source }}
+        </span>
+        <span style="padding:0 60px">
+            By: {{ joke.author }}
+        </h4>
+        </span>
+        </footer>
+    </div>
+    {% endfor %}
+<main>
 
 {% endblock %}
 

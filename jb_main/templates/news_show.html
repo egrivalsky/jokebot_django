@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2> {{ response.title }} </h2>
+<div class="w3-container">
+    <ul>
+        {% for word in keywords %}
+          <li class="w3-button">
+            <form action='news_keywords/{{ response.id }}/{{ word }}' method='GET'>
+              <button class="w3-button w3-white" type='submit'>{{word}}</button>
+            </form>
+          </li>
+        {% endfor %}
+</div>
+<p> {{ word_list }} </p>
+
+{% endblock %}

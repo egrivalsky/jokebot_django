@@ -25,7 +25,7 @@ function accordian(id) {
     <p> loading... </p>
 {% else %}   
 {% for story in response %}
-<div class="w3-light-grey" style="width:75% margin: 0 auto">
+<div class="w3-light-grey" id="news-accordian">
     <button onclick="accordian({{ story.id }})" class="w3-button w3-block">
         {{ story.title }}
     </button>
@@ -37,8 +37,9 @@ function accordian(id) {
                 <h5>Article:</h5>
             </header>
             <div class="w3-container" id="link-to-story-body">
-                <h5><a href = {{ story.url }} target="_blank">Read the article </a></h5>
-                <h5><a href="/news/{{story.id}}">Go to Keywords </a></h5>
+                <h5><a href = {{ story.url }} target="_blank"><div class="w3-button w3-grey w3-round-xlarge">Read the article </div></a></h5>
+                    <a href="/jokes/{{joke.id}}">
+                <h5><a href ="/news_keywords/{{ story.id }}"><div class="w3-button w3-grey w3-round-xlarge">Go to keywords</div></a></h5>
             </div>
         </div>
     <!--  KEYWORDS  -->

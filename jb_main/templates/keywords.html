@@ -2,6 +2,19 @@
 {% load static %}
 {% block content %}
 
-<h2> {{ response.title }} </h2>
+<header class="w3-container w3-teal" style="margin:25px auto; width:60%">
+    <h1> {{ response.title }} </h1>
+</header>
+<main class="w3-container" style="margin: 0 auto; width:50%; display:flex; flex-wrap:wrap; align-content:stretch">
+    <ul>
+        {% for word in response.adx_keywords %}
+          <li class="w3-button w3-grey w3-round-xlarge">
+            <form action='/news/related_words/{{word}}' method='GET'>
+              <button type='submit'class="w3-round-xlarge">{{word}}</button>
+            </form>
+          </li>
+        {% endfor %}
+    </ul>    
+</main>
 
 {% endblock %}

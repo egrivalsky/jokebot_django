@@ -3,44 +3,45 @@
 
 {% block content %}
     <h1>Profile</h1>
-    <p>About me: {{user.profile.about_me}}</p>
+    <p>(<a href="profile/{{ user.id }}/update/">edit profile</a>)</p>
+    <h3>About me: {{user.profile.about_me}}</h3>
     
-            <p>Jokes I've Written:</p>
-                {% for joke in written_jokes %}
-            <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin:0 auto; border">
-            <header class="w3-container w3-teal">
-            </header>
-            <div class="w3-container">
-                <a href="/jokes/{{joke.id}}">
-                  <p><h4>  {{ joke.text }}</h4></p>
-                </a>
-                  <p>Unfavorite</p>
-                </div>
-                <footer class="w3-container w3-teal" style="max-height:36px">
-                <ul>
-                  <li>From: {{ joke.source }}</li>
-                  <li>By: {{ joke.author }}</li>
-                </ul>
-            </div>
+    <h3>Jokes I've Written:</h3>
+        {% for joke in written_jokes %}
+    <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin: 15px auto; border">
+    <header class="w3-container w3-teal">
+    </header>
+    <div class="w3-container">
+        <a href="/jokes/{{joke.id}}">
+          <p><h4>  {{ joke.text }}</h4></p>
+        </a>
+          <p><a href="jokes/{{ joke.id }}/update/">Edit</p></a><p><a href="jokes/{{ joke.id }}/delete/">Delete</a></p>
+        </div>
+        <footer class="w3-container w3-teal" style="min-height:36px">
+        <ul>
+          <li>From: {{ joke.source }}</li>
+          <li>By: {{ joke.author }}</li>
+        </ul>
+    </div>
         {% endfor %}
 
-    <p>Favorite jokes:</p>
-                {% for joke in fav_jokes %}
-            <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin:0 auto; border">
-            <header class="w3-container w3-teal">
-            </header>
-                <div class="w3-container">
-                <a href="/jokes/{{joke.id}}">
-                <p><h4>  {{ joke.text }}</h4></p>
-                </a>
-                  <p><a href="jokes/{{ joke.id }}/update/">Edit</p></a><p><a href="jokes/{{ joke.id }}/delete/">Delete</a></p>
-                </div>
-                <footer class="w3-container w3-teal" style="max-height:36px">
-                <ul>
-                <li>From: {{ joke.source }}</li>
-                <li>By: {{ joke.author }}</li>
-                </ul>
-            </div>
-                {% endfor %}
+    <h3>Favorite jokes:</h3>
+        {% for joke in fav_jokes %}
+    <div class="w3-card-4 w3-topbar w3-border-teal" style="width:80%; margin: 15px auto; border">
+    <header class="w3-container w3-teal">
+    </header>
+        <div class="w3-container">
+        <a href="/jokes/{{joke.id}}">
+        <p><h4>  {{ joke.text }}</h4></p>
+        </a>
+          <p>Unfavorite</p>
+        </div>
+        <footer class="w3-container w3-teal" style="min-height:36px">
+        <ul>
+        <li>From: {{ joke.source }}</li>
+        <li>By: {{ joke.author }}</li>
+        </ul>
+    </div>
+        {% endfor %}
 
 {% endblock %}

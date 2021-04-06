@@ -9,6 +9,10 @@ from .forms import JokeForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 import twitter
 from datetime import datetime, timedelta
+from datamuse import datamuse
+import time
+
+datamuse=datamuse.Datamuse()
 
 ## SECRETS GO HERE *****************************************************************
 twitter = twitter.Api(consumer_key='SKYECqSOCN6BMIbdcV1x7r5py',
@@ -50,7 +54,7 @@ def news_keywords(request, story_id):
     for n in response:
         if n['id'] == story_id:
             response = n
-
+            n['adx_keywords'] = n['adx_keywords'].split(';')
     return render(request, 'keywords.html', { 
         'response': response, 
         })
@@ -63,7 +67,7 @@ def about(request):
 
 # JOKES
 def jokes_index(request):
-    jokes = Joke.objects.filter(user = request.user)
+    jokes = Joke.objects.filter(user = request.user).order_by('-id')
     return render(request, 'jokes/index.html', { 'jokes':jokes})
 
 def joke_show(request, joke_id):
@@ -73,7 +77,7 @@ def joke_show(request, joke_id):
     print(f"Last Tweeted: {last_tweeted}")
     return render(request, 'jokes/show.html', {
         'joke':joke,
-        'joke_form': joke_form
+        'joke_form': joke_form,
     })
 
 
@@ -96,6 +100,10 @@ class JokeDelete(DeleteView):
     model = Joke
     success_url = '/jokes'
 
+class ProfileUpdate(UpdateView):
+    model = Profile
+    fields = ['about_me', 'twitter_handle']
+    success_url = '/profile'
 
 def jokes_new(request):
     joke_form = JokeForm(request.POST)
@@ -112,22 +120,36 @@ def jokes_new(request):
 # FUNCTIONS
 def joke_tweet(request, joke_id):
         joke = Joke.objects.get(id=joke_id)
-        now = datetime.datetime.now()
-        joke.last_tweeted = now.strftime("%j")
+        now = datetime.now()
+        joke.last_tweeted = now
         message = joke.text
         twitter.PostUpdate(f"{message}")
         print(f"{message} last tweeted at {joke.last_tweeted}")
+        time.sleep(5)
         return render(request, 'jokes/show.html', {
-        'joke':joke,
+        'joke': joke,
         })
 
 def joke_favorite(request, joke_id):
-    joke = Joke.objects.get(id=joke_id)
+    joke = Joke.objects.get(id=joke_id).order_by('-id')
     user = request.user
     user.profile.favorites.add(joke)
     return render(request, 'jokes/show.html', {
     'joke':joke,
     })
+
+def related_words(request, word):
+    related = datamuse.words(rel_jja=word)
+    rhymes = datamuse.words(rel_rhy=word)
+    print(word)
+    word_list = []
+    for n in related:
+        related_words = n['word']
+        word_list.append(related_words)
+    for n in rhymes:
+        related_words = n['word']
+        word_list.append(related_words)
+    return render(request, 'related_words.html', {'word_list': word_list})
 
 
 # PROFILE

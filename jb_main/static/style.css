@@ -2,31 +2,56 @@ nav {
     height: 60px;
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around; */
+    justify-content: space-between;
     align-items: center;
     margin: 0 auto;
 }
 
+main {
+    padding-bottom: 60px;
+}
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    bottom: 0;
+    height: 60px;
+    width:100%;
+    margin-top:15px;
+}
 nav li {
     display: inline;
 }
-nav a {
+a {
     text-decoration: none;
+    }
+nav span h3 a {
+    border-radius: 20px;
+    padding: 15px;
 }
-nav li :hover {
-    color: black;
+nav span h3 a:hover {
+    font-weight: bold;
 }
 
 .footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     height: 60px;
     width:100%;
+    margin-top:15px;
+}
+#page-container {
+    position: relative;
+    min-height:100vh;
 }
 
+#content-wrap {
+    padding-bottom: 60px;
+}
 #nav-left{
     align-self: left;
 }
@@ -39,20 +64,61 @@ nav li :hover {
     display: flex;
     align-items: top;
     justify-content: center;
-    height: 200px;
-
-
 }
 
 #keywords, #people, #places, #link-to-story {
-    min-height: 100%;
+    min-height: 200px;
     width: 300px;
     margin: 10px;
-
+    max-height: fit-content(20em);
 }
 
 #link-to-story-body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#news-accordian {
+    width:75%;
+    margin: 2px auto;
+}
+
+#link-to-story-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.words {
+    display: flex;
+    margin: 0 auto; 
+    width:50%; 
+    flex-wrap: wrap; 
+    align-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+}
+.related_words {
+    padding: 3px 3px;
+    margin: 5px 5px;
+    background-color: lightskyblue;
+    border-radius: 15px;
+    flex-shrink: 1;
+}
+
+#now-write-a-joke {
+    width:400px;
+    height:100px;
+    margin: 30px auto 20px auto;
+    padding-top: 20px;
+    border-radius:25px;
+    background-color:lightgrey;
+    text-align: center;
+    align-content: center;
+    font-size: 40px;
+    font-family: sans-serif;
+    text-decoration: none;
+    box-shadow: 10px 8px 15px grey;
 }

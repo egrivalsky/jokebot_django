@@ -1,24 +1,19 @@
-# import datetime
-# from datetime import timedelta, datetime
-# import time
+from datamuse import datamuse
+datamuse = datamuse.Datamuse()
 
 
 
-# now = datetime.now()
-
-# formattedDate = now.strftime("%j")
-
-# print(formattedDate)
-
-
-from pynytimes import NYTAPI
-nyt = NYTAPI('FtZ0xW7RIZ9wRxJJiR02MNv37ChQGZPO', parse_dates=True)
-
-response = nyt.most_viewed(days = 30)
-
-print(response[0].split(','))
-# print(first['adx_keywords'].split(';')[0:2])
-# print(list(first['adx_keywords'].split(';')))
 
 
 
+def related_words(word):
+    related = datamuse.words(rel_jja=word)
+    print(word)
+    word_list = []
+    for n in related:
+        related_words = n['word']
+        word_list.append(related_words)
+    print(word_list)
+
+
+related_words('octopus')

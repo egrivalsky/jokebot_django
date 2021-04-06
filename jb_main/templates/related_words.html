@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<header class="w3-container w3-teal" style="margin:25px auto; width:60%">
+    <h1> {{ response.title }} </h1>
+</header>
+<main class="w3-container words">
+
+    {% for word in word_list %}
+        <div class="related_words"><h3> {{word}} </h3></div>
+    {% endfor %} 
+</main>
+<a href='/jokes/create'>
+    <div id="now-write-a-joke">
+        Now write a joke!
+    </div>
+</a>
+
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% for word in word_list %}
+<ul>
+    <li> {{word}} </li>
+</ul>
+{% endfor %}
+
+{% endblock %} {% endcomment %}
