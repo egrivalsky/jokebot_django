@@ -1,0 +1,1 @@
+web: gunicorn jokebot8000.wsgi
