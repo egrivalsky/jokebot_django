@@ -48,7 +48,7 @@ def news(request):
     return render(request, 'news.html', { 
         'response': response, 
         })
-@login_required
+
 def news_keywords(request, story_id):
     response = nyt.most_viewed(days = 30)
     for n in response:
@@ -118,7 +118,7 @@ def jokes_new(request):
         return render(request, 'jokes/new.html', { 'joke_form': joke_form })
 
 # FUNCTIONS
-@login_required
+
 def joke_tweet(request, joke_id):
         joke = Joke.objects.get(id=joke_id)
         now = datetime.now()
@@ -131,7 +131,7 @@ def joke_tweet(request, joke_id):
         'joke': joke,
         })
 
-@login_required
+
 def joke_favorite(request, joke_id):
     joke = Joke.objects.get(id=joke_id).order_by('-id')
     user = request.user
@@ -140,7 +140,7 @@ def joke_favorite(request, joke_id):
     'joke':joke,
     })
 
-@login_required
+
 def related_words(request, word):
     related = datamuse.words(rel_jja=word)
     rhymes = datamuse.words(rel_rhy=word)
