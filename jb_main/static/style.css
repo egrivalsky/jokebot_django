@@ -46,7 +46,7 @@ nav span h3 a:hover {
 }
 #page-container {
     position: relative;
-    min-height:100vh;
+    min-height:85vh;
 }
 
 #content-wrap {
@@ -121,4 +121,28 @@ nav span h3 a:hover {
     font-family: sans-serif;
     text-decoration: none;
     box-shadow: 10px 8px 15px grey;
+}
+
+#jokebot-photo {
+    margin: 10px 20px;
+    height: 500px;
+
+}
+
+#jokebot-paragraph {
+    padding-top: 90px;
+    margin: 10px 20px;
+    max-width: 300px;
+
+}
+img {
+    margin: 10px, 20px;
+    max-height: 500px;
+    box-shadow: 5px 5px 10px;
+}
+
+#main-index {
+    display: flex;
+    justify-content: center;
+
 }

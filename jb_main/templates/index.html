@@ -2,6 +2,20 @@
 {% load static %}
 
 {% block content %}
-    <h1>Welcome to Jokebot Index</h1>
+<h1>Welcome to Jokebot</h1>
+<main id="main-index">
+    <div id="jokebot-photo">
+        <img src="{% static 'jokebot-picture.jpg' %}" alt="The Bristol Cowboy close-up" />
+    </div>
+    <div id="jokebot-paragraph">
+        <h3>
+            Jokebot8000 is a tool to help joke writers write jokes. Check out current events by clicking on "News", then find related keywords.
+            <br>
+            Even write a joke and save it to your profile and let @Jokebot8000 tweet it out!
+        </h3>
+    </div>
+</main>
+
 {% endblock %}
+
 

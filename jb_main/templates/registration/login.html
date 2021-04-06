@@ -7,9 +7,16 @@
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     {{ form.as_p }}
+
+      <input type="radio" id="not-robot" name="bot-or-not" value="not-robot">
+      <label for="not-robot">I am not a robot</label><br>
+      <input type="radio" id="robot" name="bot-or-not" value="robot">
+      <label for="robot">I am a robot</label><br>
+
     <input type="submit" class="btn" value="login">
     <input type="hidden" name="next" value="{{ next }}">
   </form>
+
 
   <input type="hidden" name="next" value="{{ next }}">
 
