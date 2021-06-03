@@ -52,6 +52,10 @@ nav span h3 a:hover {
 #content-wrap {
     padding-bottom: 60px;
 }
+
+#link-to-portfolio:hover {
+    font-weight: bold;
+}
 #nav-left{
     align-self: left;
 }
