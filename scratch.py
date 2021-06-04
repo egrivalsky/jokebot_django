@@ -7,6 +7,7 @@ datamuse = datamuse.Datamuse()
 
 
 def related_words(word):
+    #if related words from NYT api are more than one word
     if ' ' in word:
         words = word.split(' ')
         for word in words:

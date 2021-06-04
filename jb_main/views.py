@@ -65,35 +65,6 @@ def news_keywords(request, story_id):
         if word == 'and' or word == 'the' or word == 'was':
             response['adx_keywords'].remove(word)
 
-    print(response['adx_keywords'])
-    # temp_list = response['adx_keywords'];
-    # print(temp_list)
-    # for word in temp_list:
-    #     if ' ' in word:
-    #         print(word);
-    #         temp_list.remove(word);
-    # (response['adx_keywords']) = temp_list;
-    print(response['adx_keywords'])
-
-
-        # compound_word_list = compound_word.split(' ')
-        # print(compound_word_list)
-
-        # for word in compound_word_list:
-            # if len(word) <= 2:
-            #     compound_word_list.remove(word)
-            # if word == 'and' or word == 'the' or word == 'was':
-            #     compound_word_list.remove(word)
-        # print(compound_word_list)
-
-        # for word in compound_word_list:
-        #     response['adx_keywords'].append(word);
-        
-
-    # n['adx_keywords'] = n['adx_keywords'].split(';')
-    # print('*  *  *  *  *  *')
-    # print(response['adx_keywords'])
-    # print(type(response['adx_keywords']))
 
     return render(request, 'keywords.html', { 
         'response': response, 

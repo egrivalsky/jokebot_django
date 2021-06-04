@@ -107,8 +107,8 @@ nav span h3 a:hover {
 .related_words {
     padding: 3px 3px;
     margin: 5px 5px;
-    background-color: lightskyblue;
-    border-radius: 15px;
+    background-color: silver;
+    border-radius: 0;
     flex-shrink: 1;
 }
 
