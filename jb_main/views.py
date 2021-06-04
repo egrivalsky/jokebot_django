@@ -58,6 +58,9 @@ def news_keywords(request, story_id):
            response['adx_keywords'] = response['adx_keywords'].replace(';', ' ');
            response['adx_keywords'] = response['adx_keywords'].replace(',', '');
            response['adx_keywords'] = response['adx_keywords'].replace(':', '');
+           response['adx_keywords'] = response['adx_keywords'].replace(')', '');
+           response['adx_keywords'] = response['adx_keywords'].replace('(', '');
+           response['adx_keywords'] = response['adx_keywords'].replace('-', '');
            response['adx_keywords'] = response['adx_keywords'].split(' ');
     for word in response['adx_keywords']:
         if len(word) <= 2:
